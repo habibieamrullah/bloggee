@@ -32,6 +32,13 @@ if($data != "")
 					if($x->id == $postid){
 						?>
 						<h2><?php echo $x->judul ?></h2>
+						<?php
+						if(isset($x->gambarandalan)){
+							if($x->gambarandalan != ""){
+								echo "<img src='uploads/" .$x->gambarandalan. "'>";
+							}
+						}
+						?>
 						<p><?php echo $x->tanggal ?></p>
 						<div><?php echo $x->konten ?></div>
 						<?php

@@ -1,4 +1,9 @@
-<?php include("config.php"); ?>
+<?php 
+
+include("config.php"); 
+include("functions.php"); 
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -65,6 +70,7 @@
 					<ul>
 						<li onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'>Daftar Tulisan</li>
 						<li onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'>Tambah Tulisan</li>
+						<li onclick="tampilkanhalaman('galerigambar')" style='cursor: pointer;'>Galeri Gambar</li>
 						<li onclick="tampilkanhalaman('pengaturan')" style='cursor: pointer;'>Pengaturan Website</li>
 					</ul>
 					
@@ -95,6 +101,9 @@
 						
 						<label>Tanggal</label>
 						<input id="tanggal" class="datepicker">
+						
+						<label>Gambar Andalan</label>
+						<input id="gambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
 						
 						<label>Konten</label>
 						<textarea id="konten"></textarea>
@@ -128,6 +137,50 @@
 						<input id="urlsitus">
 						
 						<button onclick="simpanpengaturan()">Simpan</button>
+					</div>
+					
+					<div id="galerigambar" class="halaman">
+						<h2>Galeri Gambar</h2>
+						
+						<?php
+						
+						if(isset($_FILES["filegambar"])){
+							
+							$namagambarbaru = uniqid();
+							$gambarbaru = uploadAndResize($namagambarbaru, "filegambar", "uploads/", 256);
+							
+							echo "Gambar berhasil diupload: " . $gambarbaru;
+							
+
+							
+							?>
+							
+							<script>
+								setTimeout(function(){
+									tampilkanhalaman("galerigambar");
+								},1000);
+								
+							</script>
+							<?php
+						}
+						
+						$folder = "uploads";
+						echo "<div id='daftargambar'>";
+						foreach(scandir($folder) as $gambar){
+							if($gambar != "." && $gambar != ".."){
+								?>
+								<img src="<?php echo $folder . "/" . $gambar ?>" style="width: 128px;" onclick="pilihgambarini('<?php echo $gambar ?>')">
+								<?php
+							}	
+							
+						}
+						echo "</div>";
+						?>
+						
+						<form method="post" enctype="multipart/form-data">
+							<input type="file" name="filegambar" accept="image/*">
+							<input type="submit" value="Unggah">
+						</form>
 					</div>
 					
 					
@@ -181,6 +234,7 @@
 							
 							var judul = $("#judul").val();
 							var tanggal = $("#tanggal").val();
+							var gambarandalan = $("#gambarandalan").val();
 							var konten = $("#konten").val();
 							
 							
@@ -188,6 +242,7 @@
 								"id" : iditem,
 								"judul" : judul,
 								"tanggal" : tanggal,
+								"gambarandalan" : gambarandalan,
 								"konten" : konten,
 							});
 							
@@ -248,6 +303,19 @@
 							
 							kirimdata();
 
+						}
+						
+						function tampilkangalerimedia(){
+							$("body").append("<div id='popupgalerimedia'>" + $("#daftargambar").html() + "<button onclick='tutuppopupgm()'>Tutup</button></div>");
+						}
+						
+						function tutuppopupgm(){
+							$("#popupgalerimedia").remove();
+						}
+						
+						function pilihgambarini(gambar){
+							$(".inputgambarandalan").val(gambar);
+							tutuppopupgm();
 						}
 						
 						
