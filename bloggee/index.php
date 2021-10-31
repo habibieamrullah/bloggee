@@ -1,25 +1,25 @@
 <?php include("config.php"); ?>
 <?php
 
-$sitedata = array();
+$datasitus = array();
 			
 $data = "";
 if(file_exists($filedb))
 	$data = file_get_contents($filedb);
 if($data != "")
-	$sitedata = json_decode($data);
+	$datasitus = json_decode($data);
 
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo $sitedata->settings->judul ?></title>
+		<title><?php echo $datasitus->pengaturan->judul ?></title>
 		<script src="jquery.min.js"></script>
 	</head>
 	<body>
 	
-		<h1><a href="<?php echo $sitedata->settings->urlsitus ?>"><?php echo $sitedata->settings->judul ?></a></h1>
+		<h1><a href="<?php echo $datasitus->pengaturan->urlsitus ?>"><?php echo $datasitus->pengaturan->judul ?></a></h1>
 	
 		<?php
 		
@@ -28,7 +28,7 @@ if($data != "")
 				
 				$postid = $_GET["post"];
 				
-				foreach($sitedata->posts as $x) {
+				foreach($datasitus->posts as $x) {
 					if($x->id == $postid){
 						?>
 						<h2><?php echo $x->judul ?></h2>
@@ -46,12 +46,17 @@ if($data != "")
 				}
 
 			}else{
-				foreach($sitedata->posts as $x) {
+				foreach($datasitus->posts as $x) {
 					echo "<div><a href='?post=" . $x->id . "'>" . $x->judul . "</a></div>";
 				}
 			}
 			
 		?>
+		
+		<!-- footer -->
+		<div class="footer">
+			<?php echo $datasitus->pengaturan->teksfooter ?>
+		</div>
 	
 	</body>
 </html>
