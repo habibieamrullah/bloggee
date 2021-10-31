@@ -1,1 +1,0 @@
-[{"id":4,"item":"Merah1231312"},{"id":5,"item":"KUNING"},{"id":7,"item":"databaruhuhuu"},{"id":9,"item":"Tambah lagi"},{"id":10,"item":"lagi lagi data"}]

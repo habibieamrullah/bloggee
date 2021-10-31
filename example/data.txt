@@ -1,0 +1,1 @@
+[{"id":0,"judul":"HALO Tulisan Pertama","konten":"HALO Ini adalah konten tulisan pertama."},{"id":1,"judul":"Yang ini kedua XXX","konten":"ini adalah teks konten postingan kedua XXX","kontenbaru":"ini adalah teks konten postingan kedua XXX"}]

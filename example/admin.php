@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Admin Panel</title>
+		<title>Bloggee - Admin Panel</title>
+		<link rel="stylesheet" href="admin.css">
 		<script src="jquery.min.js"></script>
 	</head>
 	
@@ -58,6 +59,11 @@
 					<h1>Admin Panel</h1>
 					<p>Klik <a href="?logout">di sini</a> untuk logout.</p>
 					
+					<ul>
+						<li onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'>Daftar Tulisan</li>
+						<li onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'>Tambah Tulisan</li>
+					</ul>
+					
 					
 					
 					<?php
@@ -72,20 +78,32 @@
 						
 					?>
 					
+					<div id="daftartulisan" class="halaman">
+						<h2>Daftar Tulisan</h2>
+						<div id="listitem"></div>
+					</div>
 					
 					<div id="tambahdata" class="halaman">
-						<h2>Tambah Data</h2>
-						<input id="itembaru">
+						<h2>Tambah Tulisan</h2>
+						<label>Judul Tulisan</label>
+						<input id="judul">
+						<label>Konten</label>
+						<textarea id="konten"></textarea>
 						<button onclick="tambahitem()">Tambah Item</button>
 					</div>
 					
 					<div id="editdata" class="halaman">
-						<h2>Edit Data</h2>
-						<input id="edititem">
+						<h2>Edit Tulisan</h2>
+						<label>Judul Tulisan</label>
+						<input id="editjudul">
+						<label>Konten</label>
+						<textarea id="editkonten"></textarea>
 						<button id="tombolsimpan">Simpan</button>
 					</div>
 					
-					<div id="listitem"></div>
+					
+					
+					
 					
 					
 					
@@ -100,7 +118,7 @@
 							var nomorurut = 1;
 							
 							for(var i = 0; i < item.length; i++){
-								$("#listitem").append(nomorurut + ". " + item[i].item + " (ID# " + item[i].id + ") |<span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
+								$("#listitem").append(nomorurut + ". " + item[i].judul + " (ID# " + item[i].id + ") |<span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
 								
 								nomorurut++;
 							}
@@ -117,12 +135,14 @@
 								iditem = item[item.length-1].id + 1;
 							}
 							
-							var itembaru = $("#itembaru").val();
+							var judul = $("#judul").val();
+							var konten = $("#konten").val();
 							
 							
 							item.push({
 								"id" : iditem,
-								"item" : itembaru
+								"judul" : judul,
+								"konten" : konten,
 							});
 							
 							kirimdata();
@@ -130,14 +150,12 @@
 						
 						function kirimdata(){
 							$.post("async.php", {
-								"item" : JSON.stringify(item),
+								"json" : JSON.stringify(item),
 								"adminusername" : "<?php echo $username ?>",
 								"adminpassword" : "<?php echo $password ?>",
 							}, function(data){
-								//alert(data);
-								//location.reload();
 								listitem();
-								$("#itembaru").val("").focus();
+								tampilkanhalaman('daftartulisan');
 							});
 						}
 						
@@ -147,19 +165,25 @@
 							kirimdata();
 						}
 						
+						function tampilkanhalaman(hal){
+							$(".halaman").hide();
+							$("#" + hal).show();
+						}
 						
-						$("#editdata").hide();
+						tampilkanhalaman('daftartulisan');
 						
 						function edititem(idx){
-							$("#tambahdata").hide();
-							$("#editdata").show();
-							$("#edititem").val(item[idx].item);
+							tampilkanhalaman('editdata');
+							$("#editjudul").val(item[idx].judul);
+							$("#editkonten").val(item[idx].konten);
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 						}
 						
 						function simpandatabaru(idx){
-							var databaru = $("#edititem").val();
-							item[idx].item = databaru;
+							var judulbaru = $("#editjudul").val();
+							var kontenbaru = $("#editkonten").val();
+							item[idx].judul = judulbaru;
+							item[idx].konten = kontenbaru;
 							kirimdata();
 						}
 						
@@ -170,6 +194,7 @@
 					<?php
 					
 				}else{
+					
 					//tampilkan form login
 					
 					?>
