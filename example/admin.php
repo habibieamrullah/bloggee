@@ -65,25 +65,26 @@
 					<ul>
 						<li onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'>Daftar Tulisan</li>
 						<li onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'>Tambah Tulisan</li>
+						<li onclick="tampilkanhalaman('pengaturan')" style='cursor: pointer;'>Pengaturan Website</li>
 					</ul>
 					
 					
 					
 					<?php
 		
-						$item = array();
+						$sitedata = array();
 						
 						$data = "";
 						if(file_exists($filedb))
 							$data = file_get_contents($filedb);
 						if($data != "")
-							$item = json_decode($data);
+							$sitedata = json_decode($data);
 						
 					?>
 					
 					<div id="daftartulisan" class="halaman">
 						<h2>Daftar Tulisan</h2>
-						<div id="listitem"></div>
+						<div id="listposts"></div>
 					</div>
 					
 					<div id="tambahdata" class="halaman">
@@ -117,6 +118,18 @@
 					</div>
 					
 					
+					<div id="pengaturan" class="halaman">
+						<h2>Pengaturan Website</h2>
+						
+						<label>Judul Website</label>
+						<input id="judulwebsite">
+						
+						<label>URL Situs</label>
+						<input id="urlsitus">
+						
+						<button onclick="simpanpengaturan()">Simpan</button>
+					</div>
+					
 					
 					
 					
@@ -125,29 +138,45 @@
 					
 					<script>
 						
-						var item = <?php echo json_encode($item) ?>;
+						var sitedata = <?php echo json_encode($sitedata) ?>;
 						
-						function listitem(){
-							$("#listitem").html("");
+						//If the site is empty, set the initial data structure
+						if(sitedata.length == 0){
+							sitedata = {
+								posts : [],
+								settings : {},
+							}
+						}else{
+							$("#judulwebsite").val(sitedata.settings.judul);
+							$("#urlsitus").val(sitedata.settings.urlsitus);
+						}
+						
+						
+						
+						function listposts(){
+							$("#listposts").html("");
 							
 							var nomorurut = 1;
-							
-							for(var i = 0; i < item.length; i++){
-								$("#listitem").append(nomorurut + ". " + item[i].judul + " (ID# " + item[i].id + ") |<span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
-								
-								nomorurut++;
+							if(sitedata.posts != undefined){
+								if(sitedata.posts.length > 0){
+									for(var i = 0; i < sitedata.posts.length; i++){
+										$("#listposts").append(nomorurut + ". " + sitedata.posts[i].judul + " (ID# " + sitedata.posts[i].id + ") |<span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
+										
+										nomorurut++;
+									}
+								}
 							}
 						}
 						
-						listitem();
+						listposts();
 						
 						function tambahitem(){
 							var iditem;
 							
-							if(item.length == 0){
+							if(sitedata.posts.length == 0){
 								iditem = 0;
 							}else{
-								iditem = item[item.length-1].id + 1;
+								iditem = sitedata.posts[sitedata.posts.length-1].id + 1;
 							}
 							
 							var judul = $("#judul").val();
@@ -155,7 +184,7 @@
 							var konten = $("#konten").val();
 							
 							
-							item.push({
+							sitedata.posts.push({
 								"id" : iditem,
 								"judul" : judul,
 								"tanggal" : tanggal,
@@ -167,18 +196,21 @@
 						
 						function kirimdata(){
 							$.post("async.php", {
-								"json" : JSON.stringify(item),
+								"json" : JSON.stringify(sitedata),
 								"adminusername" : "<?php echo $username ?>",
 								"adminpassword" : "<?php echo $password ?>",
 							}, function(data){
-								listitem();
+								listposts();
 								tampilkanhalaman('daftartulisan');
+								$("#judul").val("");
+								$("#tanggal").val("");
+								$("#konten").val("");
 							});
 						}
 						
 						
 						function hapusitem(idx){
-							item.splice(idx, 1);
+							sitedata.posts.splice(idx, 1);
 							kirimdata();
 						}
 						
@@ -191,18 +223,31 @@
 						
 						function edititem(idx){
 							tampilkanhalaman('editdata');
-							$("#editjudul").val(item[idx].judul);
-							$("#edittanggal").val(item[idx].tanggal);
-							$("#editkonten").val(item[idx].konten);
+							$("#editjudul").val(sitedata.posts[idx].judul);
+							$("#edittanggal").val(sitedata.posts[idx].tanggal);
+							$("#editkonten").val(sitedata.posts[idx].konten);
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 						}
 						
 						function simpandatabaru(idx){
 							var judulbaru = $("#editjudul").val();
+							var tanggalbaru = $("#edittanggal").val();
 							var kontenbaru = $("#editkonten").val();
-							item[idx].judul = judulbaru;
-							item[idx].konten = kontenbaru;
+							sitedata.posts[idx].judul = judulbaru;
+							sitedata.posts[idx].tanggal = tanggalbaru;
+							sitedata.posts[idx].konten = kontenbaru;
 							kirimdata();
+						}
+						
+						function simpanpengaturan(){
+							var judulwebsite = $("#judulwebsite").val();
+							var urlsitus = $("#urlsitus").val();
+							
+							sitedata.settings.judul = judulwebsite;
+							sitedata.settings.urlsitus = urlsitus;
+							
+							kirimdata();
+
 						}
 						
 						
