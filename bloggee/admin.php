@@ -120,6 +120,9 @@ include("functions.php");
 						<label>Tanggal</label>
 						<input id="edittanggal" class="datepickeredit">
 						
+						<label>Gambar Andalan</label>
+						<input id="editgambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
+						
 						<label>Konten</label>
 						<textarea id="editkonten"></textarea>
 						
@@ -280,6 +283,7 @@ include("functions.php");
 							tampilkanhalaman('editdata');
 							$("#editjudul").val(sitedata.posts[idx].judul);
 							$("#edittanggal").val(sitedata.posts[idx].tanggal);
+							$("#editgambarandalan").val(sitedata.posts[idx].gambarandalan);
 							$("#editkonten").val(sitedata.posts[idx].konten);
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 						}
@@ -288,9 +292,11 @@ include("functions.php");
 							var judulbaru = $("#editjudul").val();
 							var tanggalbaru = $("#edittanggal").val();
 							var kontenbaru = $("#editkonten").val();
+							var gambarandalanbaru = $("#editgambarandalan").val();
 							sitedata.posts[idx].judul = judulbaru;
 							sitedata.posts[idx].tanggal = tanggalbaru;
 							sitedata.posts[idx].konten = kontenbaru;
+							sitedata.posts[idx].gambarandalan = gambarandalanbaru;
 							kirimdata();
 						}
 						
