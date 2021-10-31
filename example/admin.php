@@ -6,6 +6,9 @@
 		<title>Bloggee - Admin Panel</title>
 		<link rel="stylesheet" href="admin.css">
 		<script src="jquery.min.js"></script>
+		
+		<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+		<script src="jquery-ui/jquery-ui.js"></script>
 	</head>
 	
 	<body>
@@ -85,19 +88,31 @@
 					
 					<div id="tambahdata" class="halaman">
 						<h2>Tambah Tulisan</h2>
+						
 						<label>Judul Tulisan</label>
 						<input id="judul">
+						
+						<label>Tanggal</label>
+						<input id="tanggal" class="datepicker">
+						
 						<label>Konten</label>
 						<textarea id="konten"></textarea>
+						
 						<button onclick="tambahitem()">Tambah Item</button>
 					</div>
 					
 					<div id="editdata" class="halaman">
 						<h2>Edit Tulisan</h2>
+						
 						<label>Judul Tulisan</label>
 						<input id="editjudul">
+						
+						<label>Tanggal</label>
+						<input id="edittanggal" class="datepickeredit">
+						
 						<label>Konten</label>
 						<textarea id="editkonten"></textarea>
+						
 						<button id="tombolsimpan">Simpan</button>
 					</div>
 					
@@ -136,12 +151,14 @@
 							}
 							
 							var judul = $("#judul").val();
+							var tanggal = $("#tanggal").val();
 							var konten = $("#konten").val();
 							
 							
 							item.push({
 								"id" : iditem,
 								"judul" : judul,
+								"tanggal" : tanggal,
 								"konten" : konten,
 							});
 							
@@ -175,6 +192,7 @@
 						function edititem(idx){
 							tampilkanhalaman('editdata');
 							$("#editjudul").val(item[idx].judul);
+							$("#edittanggal").val(item[idx].tanggal);
 							$("#editkonten").val(item[idx].konten);
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 						}
@@ -186,6 +204,12 @@
 							item[idx].konten = kontenbaru;
 							kirimdata();
 						}
+						
+						
+						$(function() {
+							$(".datepickeredit").datepicker();
+							$(".datepicker").datepicker().datepicker('setDate', 'today');
+						});
 						
 					</script>
 					

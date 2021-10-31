@@ -28,6 +28,7 @@
 					if($x->id == $postid){
 						?>
 						<h1><?php echo $x->judul ?></h1>
+						<p><?php echo $x->tanggal ?></p>
 						<div><?php echo $x->konten ?></div>
 						<?php
 					}
