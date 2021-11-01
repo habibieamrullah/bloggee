@@ -1,5 +1,5 @@
 # bloggee
- Super Simple No SQL Blog CMS
+ Super Simple No SQL Blog CMS. Check out the main page of bloggee here: https://habibieamrullah.github.io/bloggee/
 
 ## Getting Started
 1. Download bloggee
