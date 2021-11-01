@@ -10,10 +10,10 @@ include("functions.php");
 	<head>
 		<title>Bloggee - Admin Panel</title>
 		<link rel="stylesheet" href="admin.css">
-		<script src="jquery.min.js"></script>
+		<script src="lib/jquery.min.js"></script>
 		
-		<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
-		<script src="jquery-ui/jquery-ui.js"></script>
+		<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
+		<script src="lib/jquery-ui/jquery-ui.js"></script>
 	</head>
 	
 	<body>
@@ -90,7 +90,7 @@ include("functions.php");
 					
 					<div id="daftartulisan" class="halaman">
 						<h2>Daftar Tulisan</h2>
-						<div id="listposts"></div>
+						<div id="listtulisan"></div>
 					</div>
 					
 					<div id="tambahdata" class="halaman">
@@ -162,10 +162,9 @@ include("functions.php");
 							?>
 							
 							<script>
-								setTimeout(function(){
+								$("document").ready(function(){
 									tampilkanhalaman("galerigambar");
-								},1000);
-								
+								});
 							</script>
 							<?php
 						}
@@ -198,31 +197,34 @@ include("functions.php");
 					<script>
 						
 						var datasitus = <?php echo json_encode($datasitus) ?>;
+						var defaultbaseurl = "<?php echo getbaseurl() ?>";
 						
 						//If the site is empty, set the initial data structure
 						if(datasitus.length == 0){
 							datasitus = {
-								posts : [],
+								tulisan : [],
 								pengaturan : {
+									judul : "Another Bloggee Blog",
+									urlsitus : defaultbaseurl,
 									teksfooter : "Powered by <a href='https://habibieamrullah.github.io/bloggee/'>Bloggee</a>",
 								},
 							}
-						}else{
-							$("#judulwebsite").val(datasitus.pengaturan.judul);
-							$("#urlsitus").val(datasitus.pengaturan.urlsitus);
-							$("#teksfooter").val(datasitus.pengaturan.teksfooter);
 						}
 						
+						$("#judulwebsite").val(datasitus.pengaturan.judul);
+						$("#urlsitus").val(datasitus.pengaturan.urlsitus);
+						$("#teksfooter").val(datasitus.pengaturan.teksfooter);
 						
 						
-						function listposts(){
-							$("#listposts").html("");
+						
+						function listtulisan(){
+							$("#listtulisan").html("");
 							
 							var nomorurut = 1;
-							if(datasitus.posts != undefined){
-								if(datasitus.posts.length > 0){
-									for(var i = 0; i < datasitus.posts.length; i++){
-										$("#listposts").append(nomorurut + ". " + datasitus.posts[i].judul + " (ID# " + datasitus.posts[i].id + ") |<span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
+							if(datasitus.tulisan != undefined){
+								if(datasitus.tulisan.length > 0){
+									for(var i = 0; i < datasitus.tulisan.length; i++){
+										$("#listtulisan").append(nomorurut + ". " + datasitus.tulisan[i].judul + " | <span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].id + "'>Lihat</a></span> | <span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span> | <span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span> <br>");
 										
 										nomorurut++;
 									}
@@ -230,15 +232,15 @@ include("functions.php");
 							}
 						}
 						
-						listposts();
+						listtulisan();
 						
 						function tambahitem(){
 							var iditem;
 							
-							if(datasitus.posts.length == 0){
+							if(datasitus.tulisan.length == 0){
 								iditem = 0;
 							}else{
-								iditem = datasitus.posts[datasitus.posts.length-1].id + 1;
+								iditem = datasitus.tulisan[datasitus.tulisan.length-1].id + 1;
 							}
 							
 							var judul = $("#judul").val();
@@ -247,7 +249,7 @@ include("functions.php");
 							var konten = $("#konten").val();
 							
 							
-							datasitus.posts.push({
+							datasitus.tulisan.push({
 								"id" : iditem,
 								"judul" : judul,
 								"tanggal" : tanggal,
@@ -264,7 +266,7 @@ include("functions.php");
 								"adminusername" : "<?php echo $username ?>",
 								"adminpassword" : "<?php echo $password ?>",
 							}, function(data){
-								listposts();
+								listtulisan();
 								tampilkanhalaman('daftartulisan');
 								$("#judul").val("");
 								$("#tanggal").val("");
@@ -274,7 +276,7 @@ include("functions.php");
 						
 						
 						function hapusitem(idx){
-							datasitus.posts.splice(idx, 1);
+							datasitus.tulisan.splice(idx, 1);
 							kirimdata();
 						}
 						
@@ -287,10 +289,10 @@ include("functions.php");
 						
 						function edititem(idx){
 							tampilkanhalaman('editdata');
-							$("#editjudul").val(datasitus.posts[idx].judul);
-							$("#edittanggal").val(datasitus.posts[idx].tanggal);
-							$("#editgambarandalan").val(datasitus.posts[idx].gambarandalan);
-							$("#editkonten").val(datasitus.posts[idx].konten);
+							$("#editjudul").val(datasitus.tulisan[idx].judul);
+							$("#edittanggal").val(datasitus.tulisan[idx].tanggal);
+							$("#editgambarandalan").val(datasitus.tulisan[idx].gambarandalan);
+							$("#editkonten").val(datasitus.tulisan[idx].konten);
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 						}
 						
@@ -299,10 +301,10 @@ include("functions.php");
 							var tanggalbaru = $("#edittanggal").val();
 							var kontenbaru = $("#editkonten").val();
 							var gambarandalanbaru = $("#editgambarandalan").val();
-							datasitus.posts[idx].judul = judulbaru;
-							datasitus.posts[idx].tanggal = tanggalbaru;
-							datasitus.posts[idx].konten = kontenbaru;
-							datasitus.posts[idx].gambarandalan = gambarandalanbaru;
+							datasitus.tulisan[idx].judul = judulbaru;
+							datasitus.tulisan[idx].tanggal = tanggalbaru;
+							datasitus.tulisan[idx].konten = kontenbaru;
+							datasitus.tulisan[idx].gambarandalan = gambarandalanbaru;
 							kirimdata();
 						}
 						

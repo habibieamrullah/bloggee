@@ -1,5 +1,11 @@
 <?php
 
+function getbaseurl(){
+	//Base URL
+	$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	return str_replace("admin.php", "", $baseurl);
+}
+
 function uploadAndResize($newimagename, $imageinputname, $uploaddirectory, $widthsize){
 	
 	if(!file_exists($uploaddirectory))
