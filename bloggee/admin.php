@@ -9,11 +9,15 @@ include("functions.php");
 <html>
 	<head>
 		<title>Bloggee - Admin Panel</title>
-		<link rel="stylesheet" href="admin.css">
+		<link rel="stylesheet" href="themes/admin/admin.css">
 		<script src="lib/jquery.min.js"></script>
 		
 		<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
 		<script src="lib/jquery-ui/jquery-ui.js"></script>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap" rel="stylesheet">
 	</head>
 	
 	<body>
@@ -63,6 +67,9 @@ include("functions.php");
 			}else{
 				if(isset($_SESSION["webadmin"])){
 					//berarti admin sudah login
+					
+					
+					
 					?>
 					<h1>Admin Panel</h1>
 					<p>Klik <a href="?logout">di sini</a> untuk logout.</p>
@@ -352,16 +359,25 @@ include("functions.php");
 					
 					?>
 					
-					<h2>Admin Login</h2>
-					<form method="post">
-						<label>Username</label>
-						<input name="username" type="text">
-						<label>Password</label>
-						<input name="password" type="password">
-						
-						<input type="submit" value="Login">
-					</form>
-					
+					<div id="adminloginparent">
+						<div id="adminlogincell">
+							<div id="adminlogin">
+								<div style="text-align: left">
+									<h2>Admin Login</h2>
+									<form method="post">
+										<label>Username</label>
+										<input name="username" type="text">
+										<label>Password</label>
+										<input name="password" type="password">
+										
+										<div style="text-align: center;">
+											<input class="submitbutton" type="submit" value="Login">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 					<?php
 				}
 			}

@@ -1,0 +1,95 @@
+body {
+	
+    background: url(images/bg.jpg) no-repeat fixed center; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	overflow: auto;
+	
+	font-family: 'Exo', sans-serif;
+}
+
+
+#adminloginparent{
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+#adminlogincell{
+	display: table-cell; vertical-align: middle; text-align: center;
+}
+
+#adminlogin{
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(5px);
+	padding: 50px;
+	border-radius: 5px;
+}
+
+
+.submitbutton{
+	background-color: #61a7ff;
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	display: inline-block;
+	transition: background-color 400ms;
+	cursor: pointer;
+}
+
+.submitbutton:hover{
+	background-color: #2280f6;
+}
+
+input, textarea{
+	display: block;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#popupgalerimedia{
+	position: fixed;
+	top: 50px;
+	left: 50px;
+	right: 50px;
+	bottom: 50px;
+	background-color: white;
+	border: 2px solid black;
+	overflow: auto;
+}
