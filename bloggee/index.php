@@ -45,7 +45,9 @@ if($data != ""){
 
 				}else{
 					foreach($datasitus->tulisan as $x) {
-						echo "<div><a href='?post=" . $x->id . "'>" . $x->judul . "</a></div>";
+						?>
+						<div><a href='?post=<?php echo $x->id ?>'><?php echo  $x->judul ?></a></div>
+						<?php
 					}
 				}
 				
