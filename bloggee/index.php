@@ -46,7 +46,11 @@ if($data != ""){
 				}else{
 					foreach($datasitus->tulisan as $x) {
 						?>
-						<div><a href='?post=<?php echo $x->id ?>'><?php echo  $x->judul ?></a></div>
+						<div>
+							<h2><a href="?post=<?php echo $x->id ?>"><?php echo  $x->judul ?></a></h2>
+							<img src="uploads/<?php echo $x->gambarandalan ?>" style="width: 128px;">
+							<div><?php echo substr($x->konten, 0, 40) ?> ...</div>
+						</div>
 						<?php
 					}
 				}
