@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap');
+
 body {
 	
     background: url(images/bg.jpg) no-repeat fixed center; 
@@ -13,6 +15,47 @@ body {
 	font-family: 'Exo', sans-serif;
 }
 
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+.fa{
+	color: #d1842d;
+	width: 30px;
+}
+
+h1, h2, h3, h4, h5, p{
+	margin: 0px;
+	margin-bottom: 10px;
+}
+
+#adminpanelparent{
+	margin: 50px;
+	background-color: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(5px);
+	border-radius: 5px;
+}
+
+#adminpanel{
+	
+	display: table;
+	width: 100%;
+	height: 100%;
+	
+}
+
+#menu{
+	display: table-cell;
+	width: 200px;
+	padding: 30px;
+}
+
+#admincontent{
+	display: table-cell;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 30px;
+}
 
 #adminloginparent{
 	display: table;
@@ -54,33 +97,13 @@ input, textarea{
 	display: block;
 	padding: 10px;
 	margin-bottom: 10px;
+	border-radius: 3px;
+	border: none;
+	outline: none;
+	background-color: #e9f3ff;
+	font-weight: bold;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #popupgalerimedia{
@@ -92,4 +115,37 @@ input, textarea{
 	background-color: white;
 	border: 2px solid black;
 	overflow: auto;
+}
+
+.leftmenuitem{
+	padding: 10px;
+	transition: color 400ms;
+	font-weight: bold;
+}
+
+.leftmenuitem:hover{
+	color: #d1842d;
+}
+
+
+.admintable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.admintable td, .admintable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.admintable tr:nth-child(even){background-color: #f2f2f2;}
+
+.admintable tr:hover {background-color: #ddd;}
+
+.admintable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #d1842d;
+  color: white;
 }

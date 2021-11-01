@@ -1,12 +1,12 @@
 <?php
 
-function getbaseurl(){
+function gee_getbaseurl(){
 	//Base URL
 	$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	return str_replace("admin.php", "", $baseurl);
 }
 
-function uploadAndResize($newimagename, $imageinputname, $uploaddirectory, $widthsize){
+function gee_uploadAndResize($newimagename, $imageinputname, $uploaddirectory, $widthsize){
 	
 	if(!file_exists($uploaddirectory))
 		mkdir($uploaddirectory);
@@ -21,7 +21,7 @@ function uploadAndResize($newimagename, $imageinputname, $uploaddirectory, $widt
 		if (in_array($extension, $extsAllowed) ) { 
 			//Means extension is okay, 
 			//Proceed storing new pic
-			resizeAndSave($_FILES[$imageinputname]['tmp_name'], $uploaddirectory . $newimagename . "." . $extension, $widthsize);
+			gee_resizeAndSave($_FILES[$imageinputname]['tmp_name'], $uploaddirectory . $newimagename . "." . $extension, $widthsize);
 			
 			return $newimagename . "." . $extension;
 		}else{}
@@ -55,7 +55,7 @@ const IMAGE_HANDLERS = [
  * @param $targetWidth - desired output width
  * @param $targetHeight - desired output height or null
  */
-function resizeAndSave($src, $dest, $targetWidth, $targetHeight = null) {
+function gee_resizeAndSave($src, $dest, $targetWidth, $targetHeight = null) {
 
     // 1. Load the image from the given $src
     // - see if the file actually exists
