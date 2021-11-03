@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300&display=swap');
+
+#main {
+	
+	
+	font-family: 'Karla', sans-serif;
+	
+    background: url(images/bg.jpg) no-repeat fixed center; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	padding: 75px;
+	padding-left: 100px;
+	padding-right: 100px;
+	
+	overflow: auto;
+	
+	font-weight: normal;
+}
+
+#container{
+	width: 100%;
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+h1, h2, h3, h4, h5{
+	font-weight: normal;
+	font-family: 'Passion One', cursive;
+	margin: 0px;
+	margin-bottom: 10px;
+}
+
+.postthumb{
+	display: inline-block;
+	width: 100%;
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	text-align: left;
+	margin-bottom: 10px; 
+}
+
+.footer{
+	text-align: center;
+	margin: 50px;
+	color: white;
+	font-weight: bold;
+}
+
+.singlepost{
+	background-color: white;
+	border-radius: 10px;
+}
+
+.excerpt{
+	font-style: italic;
+	background-color: #eef5ff;
+	padding: 20px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}

@@ -12,14 +12,12 @@ include("functions.php");
 		
 		<link rel="stylesheet" href="lib/fa/css/font-awesome.min.css">
 		
-		<link rel="stylesheet" href="themes/admin/admin.css">
+		<link rel="stylesheet" href="themes/admin/earlyadmin/admin.css">
 		<script src="lib/jquery.min.js"></script>
 		
 		<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
 		<script src="lib/jquery-ui/jquery-ui.js"></script>
 		<script src="lib/tinymce/tinymce.min.js"></script>
-		
-		
 		
 	</head>
 	
@@ -126,6 +124,7 @@ include("functions.php");
 								<div class="leftmenuitem" onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'><i class="fa fa-list" aria-hidden="true"></i>Daftar Tulisan</div>
 								<div class="leftmenuitem" onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'><i class="fa fa-plus" aria-hidden="true"></i>Tambah Tulisan</div>
 								<div class="leftmenuitem" onclick="tampilkanhalaman('galerigambar')" style='cursor: pointer;'><i class="fa fa-image" aria-hidden="true"></i>Galeri Gambar</div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('theme')" style='cursor: pointer;'><i class="fa fa-paint-brush" aria-hidden="true"></i>Tampilan</div>
 								<div class="leftmenuitem" onclick="tampilkanhalaman('pengaturan')" style='cursor: pointer;'><i class="fa fa-cogs" aria-hidden="true"></i>Pengaturan</div>
 								
 								<div class="leftmenuitem"><a href="?logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></div>
@@ -181,6 +180,22 @@ include("functions.php");
 									<button class='submitbutton' id="tombolsimpan">Simpan</button>
 								</div>
 								
+								<div id="theme" class="halaman">
+									<h2>Tampilan dan Tema</h2>
+									<?php
+									$folder = "themes/client/";
+									echo "<div>";
+									foreach(scandir($folder) as $theme){
+										if($theme != "." && $theme != ".."){
+											?>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;"></div>
+											<?php
+										}	
+										
+									}
+									echo "</div>";
+									?>
+								</div>
 								
 								<div id="pengaturan" class="halaman">
 									<h2>Pengaturan Website</h2>
@@ -260,6 +275,8 @@ include("functions.php");
 								pengaturan : {
 									judul : "Another Bloggee Blog",
 									urlsitus : defaultbaseurl,
+									themeAdmin : "earlyadmin",
+									themeClient : "earlyclient",
 									teksfooter : "Powered by <a href='https://habibieamrullah.github.io/bloggee/'>Bloggee</a>",
 								},
 							}
@@ -341,10 +358,10 @@ include("functions.php");
 								listtulisan();
 								tampilkanhalaman("daftartulisan");
 								$("#judul").val("");
+								$("#gambarandalan").val("");
 								$("#tanggal").val("");
 								$("#sekilas").val("");
-								$("#konten").val("");
-								
+								tinymce.activeEditor.setContent("");								
 							});
 						}
 						
@@ -425,7 +442,6 @@ include("functions.php");
 							tutuppopupgm();
 						}
 						
-						
 						$(function() {
 							$(".datepickeredit").datepicker();
 						});
@@ -474,7 +490,7 @@ include("functions.php");
 		<script>
 		tinymce.init({ 
 			selector : '.texteditor' , 
-			plugins : 'directionality, code', 
+			plugins : 'directionality, code, link', 
 			toolbar: "ltr rtl | alignleft aligncenter alignright alignjustify | outdent indent | sizeselect | bold italic | fontselect | fontsizeselect", 
 			relative_urls: false, 
 			remove_script_host : true, 

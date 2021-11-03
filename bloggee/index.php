@@ -16,7 +16,7 @@ if($data != ""){
 			<title><?php echo $datasitus->pengaturan->judul ?></title>
 			<script src="lib/jquery.min.js"></script>
 			
-			<link rel="stylesheet" href="themes/frontend/style.css">
+			<link rel="stylesheet" href="themes/client/earlyclient/style.css">
 		</head>
 		<body>
 		
