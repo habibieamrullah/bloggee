@@ -272,6 +272,7 @@ include("functions.php");
 						
 						
 						function listtulisan(){
+							
 							$("#listtulisan").html("");
 							
 							var nomorurut = 1;
@@ -293,49 +294,70 @@ include("functions.php");
 						listtulisan();
 						
 						function tambahtulisan(){
-							var iditem;
+							var idartikel;
 							
 							if(datasitus.tulisan.length == 0){
-								iditem = 0;
+								idartikel = 0;
 							}else{
-								iditem = datasitus.tulisan[datasitus.tulisan.length-1].id + 1;
+								idartikel = datasitus.tulisan[datasitus.tulisan.length-1].id + 1;
 							}
 							
 							var judul = $("#judul").val();
 							var tanggal = $("#tanggal").val();
 							var gambarandalan = $("#gambarandalan").val();
+							var sekilas = $("#sekilas").val();
 							var konten = $("#konten").val();
 							
 							
 							datasitus.tulisan.push({
-								"id" : iditem,
+								"id" : idartikel,
 								"judul" : judul,
 								"tanggal" : tanggal,
 								"gambarandalan" : gambarandalan,
-								"konten" : konten,
+								"sekilas" : sekilas,
 							});
 							
-							kirimdata();
+							kirimdata(konten, idartikel);
 						}
 						
-						function kirimdata(){
+						function kirimdata(kontentulisan, idtulisan){
 							$.post("async.php", {
 								"json" : JSON.stringify(datasitus),
 								"adminusername" : adminusername,
 								"adminpassword" : adminpassword,
 							}, function(data){
+								
+								if(typeof konten != "undefined"){
+									$.post("async.php", {
+										"adminusername" : adminusername,
+										"adminpassword" : adminpassword,
+										"kontentulisan" : kontentulisan,
+										"idtulisan" : idtulisan,
+									}, function(data){
+										
+									});
+								}
+								
 								listtulisan();
-								tampilkanhalaman('daftartulisan');
+								tampilkanhalaman("daftartulisan");
 								$("#judul").val("");
 								$("#tanggal").val("");
+								$("#sekilas").val("");
 								$("#konten").val("");
+								
 							});
 						}
 						
 						
 						function hapusitem(idx){
-							datasitus.tulisan.splice(idx, 1);
-							kirimdata();
+							$.post("async.php", {
+								"hapustulisan" : datasitus.tulisan[idx].id,
+								"adminusername" : adminusername,
+								"adminpassword" : adminpassword,
+							}, function(data){
+								datasitus.tulisan.splice(idx, 1);
+								kirimdata();
+							});
 						}
 						
 						function tampilkanhalaman(hal){
