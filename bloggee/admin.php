@@ -198,8 +198,13 @@ if($data != ""){
 									echo "<div style='margin-bottom: 20px;'>";
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
+											
+											if($datasitus->pengaturan->themeClient == $theme)
+												$border = " border: 2px solid green;";
+											else
+												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="settheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;<?php echo $border ?>" onclick="settheme('<?php echo $theme ?>')"></div>
 											<?php
 										}	
 										
@@ -213,8 +218,12 @@ if($data != ""){
 									echo "<div>";
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
+											if($datasitus->pengaturan->themeAdmin == $theme)
+												$border = " border: 2px solid green;";
+											else
+												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="setadmintheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;<?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')"></div>
 											<?php
 										}	
 										
@@ -475,6 +484,9 @@ if($data != ""){
 						function settheme(theme){
 							datasitus.pengaturan.themeClient = theme;
 							kirimdata();
+							setTimeout(function(){
+								location.reload();
+							}, 1000);
 						}
 						
 						function setadmintheme(theme){
