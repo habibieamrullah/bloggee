@@ -506,7 +506,7 @@ if($data != ""){
 						
 						$("document").ready(function(){
 							var urlparam = new URLSearchParams(location.search);
-							if(urlparam.get("page") != ""){
+							if(urlparam.get("page") != null){
 								tampilkanhalaman(urlparam.get("page"));
 							}
 						});
