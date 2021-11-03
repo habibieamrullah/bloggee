@@ -279,7 +279,10 @@ if($data != ""){
 									foreach(scandir($folder) as $gambar){
 										if($gambar != "." && $gambar != ".."){
 											?>
-											<div style="display: inline-block; width: 128px; height: 128px; background-image: url(uploads/<?php echo $gambar ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="pilihgambarini('<?php echo $gambar ?>')"></div>
+											<div style="display: inline-block; text-align: center; margin: 10px;">
+												<div style="display: inline-block; width: 128px; height: 128px; background-image: url(uploads/<?php echo $gambar ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="pilihgambarini('<?php echo $gambar ?>')"></div>
+												<div><i class="fa fa-trash"></i> Hapus</div>
+											</div>
 											<?php
 										}	
 										
