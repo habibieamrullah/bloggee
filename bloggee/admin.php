@@ -155,7 +155,7 @@ include("functions.php");
 									<textarea id="editkonten" class="texteditor"></textarea>
 									<br>
 									
-									<button class='submitbutton' onclick="tambahitem()">Tambah Item</button>
+									<button class='submitbutton' onclick="tambahtulisan()">Tambah Item</button>
 								</div>
 								
 								<div id="editdata" class="halaman">
@@ -277,8 +277,8 @@ include("functions.php");
 							var nomorurut = 1;
 							if(datasitus.tulisan != undefined){
 								if(datasitus.tulisan.length > 0){
-									var datalisttulisan = "<table class='admintable'><tr><th>No. Urut</th><th>Judul</th><th>Lihat</th><th>Edit</th><th>Hapus</th>";
-									for(var i = 0; i < datasitus.tulisan.length; i++){
+									var datalisttulisan = "<table class='admintable'><tr><th>No</th><th>Judul</th><th>Lihat</th><th>Edit</th><th>Hapus</th>";
+									for(var i = datasitus.tulisan.length-1; i >= 0; i++){
 										
 										datalisttulisan += "<tr><td>" + nomorurut + "</td><td>" + datasitus.tulisan[i].judul + "</td><td><span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].id + "'>Lihat</a></span></td><td><span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span></td><td><span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span></td></tr>";
 										
@@ -292,7 +292,7 @@ include("functions.php");
 						
 						listtulisan();
 						
-						function tambahitem(){
+						function tambahtulisan(){
 							var iditem;
 							
 							if(datasitus.tulisan.length == 0){
