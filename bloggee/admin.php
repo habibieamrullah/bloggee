@@ -306,7 +306,7 @@ include("functions.php");
 							var tanggal = $("#tanggal").val();
 							var gambarandalan = $("#gambarandalan").val();
 							var sekilas = $("#sekilas").val();
-							var konten = $("#konten").val();
+							var konten = tinymce.activeEditor.getContent();
 							
 							
 							datasitus.tulisan.push({
@@ -327,14 +327,14 @@ include("functions.php");
 								"adminpassword" : adminpassword,
 							}, function(data){
 								
-								if(typeof konten != "undefined"){
+								if(typeof kontentulisan != "undefined"){
 									$.post("async.php", {
 										"adminusername" : adminusername,
 										"adminpassword" : adminpassword,
 										"kontentulisan" : kontentulisan,
 										"idtulisan" : idtulisan,
 									}, function(data){
-										
+										console.log("Posted!");
 									});
 								}
 								
@@ -379,7 +379,7 @@ include("functions.php");
 							$("#editkonten").val("");
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
 							$.post("async.php", {
-								"lihattulisan" : datasitus.tulisan[idx].id;
+								"lihattulisan" : datasitus.tulisan[idx].id,
 							}, function(data){
 								$("#editkonten").val(data);
 							});
@@ -389,7 +389,7 @@ include("functions.php");
 							var judulbaru = $("#editjudul").val();
 							var tanggalbaru = $("#edittanggal").val();
 							var sekilasbaru = $("#editsekilas").val();
-							var kontenbaru = $("#editkonten").val();
+							var kontenbaru = tinymce.activeEditor.getContent();
 							var gambarandalanbaru = $("#editgambarandalan").val();
 							datasitus.tulisan[idx].judul = judulbaru;
 							datasitus.tulisan[idx].tanggal = tanggalbaru;
