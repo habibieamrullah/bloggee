@@ -12,7 +12,14 @@ include("functions.php");
 		
 		<link rel="stylesheet" href="lib/fa/css/font-awesome.min.css">
 		
-		<link rel="stylesheet" href="themes/admin/earlyadmin/admin.css">
+		
+		<?php 
+		$currenttheme = "earlyadmin";
+		if(isset($datasitus->pengaturan->themeAdmin))
+			$currenttheme = $datasitus->pengaturan->themeAdmin;
+		?>
+		<link rel="stylesheet" href="themes/admin/<?php echo $currenttheme ?>/style.css">
+		
 		<script src="lib/jquery.min.js"></script>
 		
 		<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
@@ -182,13 +189,29 @@ include("functions.php");
 								
 								<div id="theme" class="halaman">
 									<h2>Tampilan dan Tema</h2>
+									<h3>Tema Situs</h3>
 									<?php
 									$folder = "themes/client/";
+									echo "<div style='margin-bottom: 20px;'>";
+									foreach(scandir($folder) as $theme){
+										if($theme != "." && $theme != ".."){
+											?>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="settheme('<?php echo $theme ?>')"></div>
+											<?php
+										}	
+										
+									}
+									echo "</div>";
+									?>
+									
+									<h3>Tema Admin</h3>
+									<?php
+									$folder = "themes/admin/";
 									echo "<div>";
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;"></div>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="setadmintheme('<?php echo $theme ?>')"></div>
 											<?php
 										}	
 										
@@ -446,7 +469,22 @@ include("functions.php");
 							$(".datepickeredit").datepicker();
 						});
 						
+						function settheme(theme){
+							datasitus.pengaturan.themeClient = theme;
+							kirimdata();
+						}
+						
+						function setadmintheme(theme){
+							datasitus.pengaturan.themeAdmin = theme;
+							kirimdata();
+							setTimeout(function(){
+								location.reload();
+							}, 1000);
+						}
+						
 					</script>
+					
+					
 					
 					
 					

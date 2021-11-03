@@ -16,7 +16,13 @@ if($data != ""){
 			<title><?php echo $datasitus->pengaturan->judul ?></title>
 			<script src="lib/jquery.min.js"></script>
 			
-			<link rel="stylesheet" href="themes/client/earlyclient/style.css">
+			
+			<?php 
+			$currenttheme = "earlyclient";
+			if(isset($datasitus->pengaturan->themeClient))
+				$currenttheme = $datasitus->pengaturan->themeClient;
+			?>
+			<link rel="stylesheet" href="themes/client/<?php echo $currenttheme ?>/style.css">
 		</head>
 		<body>
 		
