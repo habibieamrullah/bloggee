@@ -375,20 +375,28 @@ include("functions.php");
 							$("#editjudul").val(datasitus.tulisan[idx].judul);
 							$("#edittanggal").val(datasitus.tulisan[idx].tanggal);
 							$("#editgambarandalan").val(datasitus.tulisan[idx].gambarandalan);
-							$("#editkonten").val(datasitus.tulisan[idx].konten);
+							$("#editsekilas").val(datasitus.tulisan[idx].sekilas);
+							$("#editkonten").val("");
 							$("#tombolsimpan").attr("onclick", "simpandatabaru("+idx+")");
+							$.post("async.php", {
+								"lihattulisan" : datasitus.tulisan[idx].id;
+							}, function(data){
+								$("#editkonten").val(data);
+							});
 						}
 						
 						function simpandatabaru(idx){
 							var judulbaru = $("#editjudul").val();
 							var tanggalbaru = $("#edittanggal").val();
+							var sekilasbaru = $("#editsekilas").val();
 							var kontenbaru = $("#editkonten").val();
 							var gambarandalanbaru = $("#editgambarandalan").val();
 							datasitus.tulisan[idx].judul = judulbaru;
 							datasitus.tulisan[idx].tanggal = tanggalbaru;
-							datasitus.tulisan[idx].konten = kontenbaru;
+							datasitus.tulisan[idx].sekilas = sekilasbaru;
 							datasitus.tulisan[idx].gambarandalan = gambarandalanbaru;
-							kirimdata();
+							
+							kirimdata(kontenbaru, datasitus.tulisan[idx].id);
 						}
 						
 						function simpanpengaturan(){
