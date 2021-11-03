@@ -279,7 +279,7 @@ include("functions.php");
 							if(datasitus.tulisan != undefined){
 								if(datasitus.tulisan.length > 0){
 									var datalisttulisan = "<table class='admintable'><tr><th>No</th><th>Judul</th><th>Lihat</th><th>Edit</th><th>Hapus</th>";
-									for(var i = datasitus.tulisan.length-1; i >= 0; i++){
+									for(var i = datasitus.tulisan.length-1; i >= 0; i--){
 										
 										datalisttulisan += "<tr><td>" + nomorurut + "</td><td>" + datasitus.tulisan[i].judul + "</td><td><span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].id + "'>Lihat</a></span></td><td><span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span></td><td><span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span></td></tr>";
 										
@@ -381,7 +381,7 @@ include("functions.php");
 							$.post("async.php", {
 								"lihattulisan" : datasitus.tulisan[idx].id,
 							}, function(data){
-								$("#editkonten").val(data);
+								tinymce.activeEditor.setContent(data);
 							});
 						}
 						

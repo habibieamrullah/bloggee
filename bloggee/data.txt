@@ -1,0 +1,1 @@
+{"tulisan":[{"id":0,"judul":"11111111111111111111","tanggal":"11/03/2021","gambarandalan":"617f0228f1a05.png","sekilas":"fsfsdfsf111111111111111111111"}],"pengaturan":{"judul":"Another Bloggee Blog","urlsitus":"http://localhost/ThirteeNov/bloggee/bloggee/","teksfooter":"Powered by <a href='https://habibieamrullah.github.io/bloggee/'>Bloggee</a>"}}
