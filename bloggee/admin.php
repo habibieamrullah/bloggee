@@ -17,7 +17,7 @@ include("functions.php");
 		
 		<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
 		<script src="lib/jquery-ui/jquery-ui.js"></script>
-		
+		<script src="lib/tinymce/tinymce.min.js"></script>
 		
 		
 		
@@ -148,8 +148,12 @@ include("functions.php");
 									<label>Gambar Andalan</label>
 									<input id="gambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
 									
+									<label>Sekilas</label>
+									<textarea id="sekilas"></textarea>
+									
 									<label>Konten</label>
-									<textarea id="konten"></textarea>
+									<textarea id="editkonten" class="texteditor"></textarea>
+									<br>
 									
 									<button class='submitbutton' onclick="tambahitem()">Tambah Item</button>
 								</div>
@@ -166,8 +170,13 @@ include("functions.php");
 									<label>Gambar Andalan</label>
 									<input id="editgambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
 									
+									<label>Sekilas</label>
+									<textarea id="editsekilas"></textarea>
+									
 									<label>Konten</label>
-									<textarea id="editkonten"></textarea>
+									<textarea id="editkonten" class="texteditor"></textarea>
+									
+									<br>
 									
 									<button class='submitbutton' id="tombolsimpan">Simpan</button>
 								</div>
@@ -241,6 +250,9 @@ include("functions.php");
 						var datasitus = <?php echo json_encode($datasitus) ?>;
 						var defaultbaseurl = "<?php echo gee_getbaseurl() ?>";
 						
+						var adminusername = "<?php echo $username ?>";
+						var adminpassword = "<?php echo $password ?>";
+						
 						//If the site is empty, set the initial data structure
 						if(datasitus.length == 0){
 							datasitus = {
@@ -309,8 +321,8 @@ include("functions.php");
 						function kirimdata(){
 							$.post("async.php", {
 								"json" : JSON.stringify(datasitus),
-								"adminusername" : "<?php echo $username ?>",
-								"adminpassword" : "<?php echo $password ?>",
+								"adminusername" : adminusername,
+								"adminpassword" : adminpassword,
 							}, function(data){
 								listtulisan();
 								tampilkanhalaman('daftartulisan');
@@ -429,5 +441,17 @@ include("functions.php");
 		
 		?>
 		
+		<script>
+		tinymce.init({ 
+			selector : '.texteditor' , 
+			plugins : 'directionality, code', 
+			toolbar: "ltr rtl | alignleft aligncenter alignright alignjustify | outdent indent | sizeselect | bold italic | fontselect | fontsizeselect", 
+			relative_urls: false, 
+			remove_script_host : true, 
+			statusbar: false,
+			convert_newlines_to_brs : true
+		});
+
+		</script>
 	</body>
 </html>
