@@ -3,6 +3,16 @@
 include("config.php"); 
 include("functions.php"); 
 
+$datasitus = array();
+			
+$data = "";
+if(file_exists($filedb)){
+	$data = file_get_contents($filedb);
+}
+if($data != ""){
+	$datasitus = json_decode($data);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -109,13 +119,6 @@ include("functions.php");
 					//berarti admin sudah login
 					
 		
-					$datasitus = array();
-					
-					$data = "";
-					if(file_exists($filedb))
-						$data = file_get_contents($filedb);
-					if($data != "")
-						$datasitus = json_decode($data);
 				
 					
 					
