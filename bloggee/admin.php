@@ -200,11 +200,11 @@ if($data != ""){
 										if($theme != "." && $theme != ".."){
 											
 											if($datasitus->pengaturan->themeClient == $theme)
-												$border = " border: 2px solid green;";
+												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;<?php echo $border ?>" onclick="settheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; <?php echo $border ?>" onclick="settheme('<?php echo $theme ?>')"></div>
 											<?php
 										}	
 										
@@ -219,11 +219,11 @@ if($data != ""){
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
 											if($datasitus->pengaturan->themeAdmin == $theme)
-												$border = " border: 2px solid green;";
+												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;<?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; <?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')"></div>
 											<?php
 										}	
 										
@@ -267,6 +267,8 @@ if($data != ""){
 										<script>
 											$("document").ready(function(){
 												tampilkanhalaman("galerigambar");
+												
+												
 											});
 										</script>
 										<?php
@@ -482,20 +484,33 @@ if($data != ""){
 						});
 						
 						function settheme(theme){
-							datasitus.pengaturan.themeClient = theme;
-							kirimdata();
-							setTimeout(function(){
-								location.reload();
-							}, 1000);
+							$("body").fadeOut(500, function(){
+								datasitus.pengaturan.themeClient = theme;
+								kirimdata();
+								setTimeout(function(){
+									location.href = datasitus.pengaturan.urlsitus + "admin.php?page=theme";;
+								}, 1000);
+							});
 						}
 						
 						function setadmintheme(theme){
-							datasitus.pengaturan.themeAdmin = theme;
-							kirimdata();
-							setTimeout(function(){
-								location.reload();
-							}, 1000);
+							$("body").fadeOut(500, function(){
+								datasitus.pengaturan.themeAdmin = theme;
+								kirimdata();
+								setTimeout(function(){
+									location.href = datasitus.pengaturan.urlsitus + "admin.php?page=theme";;
+								}, 1000);
+							});
 						}
+						
+						
+						$("document").ready(function(){
+							var urlparam = new URLSearchParams(location.search);
+							if(urlparam.get("page") != ""){
+								tampilkanhalaman(urlparam.get("page"));
+							}
+						});
+						
 						
 					</script>
 					
