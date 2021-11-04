@@ -262,7 +262,7 @@ if($data != ""){
 									<label>Teks Footer</label>
 									<input id="teksfooter">
 									
-									<label>Link Dinamis (link post berubah saat judul berubah)</label>
+									<label>Link Dinamis (link tulisan berubah saat judul berubah)</label>
 									<select id="linkdinamis">
 										<option value=0>Tidak</option>
 										<option value=1>Ya</option>
