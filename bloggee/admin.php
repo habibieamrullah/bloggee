@@ -199,13 +199,22 @@ if($data != ""){
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
 											
+											
+											$themeinfotxt = file_get_contents($folder . $theme . "/info.txt");
+											$themeinfoarr = explode(",", $themeinfotxt);
+											$themeinfo = "<h4 style='margin: 0px;'>" . explode(":", $themeinfoarr[0])[1] . " by " . explode(":", $themeinfoarr[1])[1] . "</h4><p style='margin: 0px;'>" . explode(":", $themeinfoarr[2])[1] . "</p>";
+											
+											
 											if($datasitus->pengaturan->themeClient == $theme)
 												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; <?php echo $border ?>" onclick="settheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 256px; height: 153px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; position: relative; <?php echo $border ?>" onclick="settheme('<?php echo $theme ?>')">
+												<div style="font-size: 10px; padding: 10px; position: absolute; left: 0; bottom: 0; right: 0; background-color: rgba(0,0,0,0.5); color: white;"><?php echo $themeinfo ?></div>
+											</div>
 											<?php
+											
 										}	
 										
 									}
@@ -219,12 +228,19 @@ if($data != ""){
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
 											
+											$themeinfotxt = file_get_contents($folder . $theme . "/info.txt");
+											$themeinfoarr = explode(",", $themeinfotxt);
+											$themeinfo = "<h4 style='margin: 0px;'>" . explode(":", $themeinfoarr[0])[1] . " by " . explode(":", $themeinfoarr[1])[1] . "</h4><p style='margin: 0px;'>" . explode(":", $themeinfoarr[2])[1] . "</p>";
+											
+											
 											if($datasitus->pengaturan->themeAdmin == $theme)
 												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
 											?>
-											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; <?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')"></div>
+											<div style="display: inline-block; width: 256px; height: 153px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; position: relative; <?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')">
+												<div style="font-size: 10px; padding: 10px; position: absolute; left: 0; bottom: 0; right: 0; background-color: rgba(0,0,0,0.5); color: white;"><?php echo $themeinfo ?></div>
+											</div>
 											<?php
 										
 										}	
