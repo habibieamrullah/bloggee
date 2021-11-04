@@ -1,4 +1,5 @@
 <?php include("config.php"); ?>
+<?php include("functions.php"); ?>
 <?php
 	$gee_datasitus = array();
 	$gee_jsonsitus = "";

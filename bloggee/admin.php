@@ -127,7 +127,7 @@ if($data != ""){
 					<div id="adminpanelparent">
 						<div id="adminpanel">
 							<div id="menu">
-								<h1><i class="fa fa-tachometer" aria-hidden="true"></i> Bloggee</h1>
+								<h1 onclick="gotoadmin()" style="cursor: pointer;"><i class="fa fa-tachometer" aria-hidden="true"></i> Bloggee</h1>
 								
 								
 								
@@ -342,7 +342,7 @@ if($data != ""){
 									var datalisttulisan = "<table class='admintable'><tr><th>No</th><th>Judul</th><th>Lihat</th><th>Edit</th><th>Hapus</th>";
 									for(var i = datasitus.tulisan.length-1; i >= 0; i--){
 										
-										datalisttulisan += "<tr><td>" + nomorurut + "</td><td>" + datasitus.tulisan[i].judul + "</td><td><span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].id + "' target='_blank'>Lihat</a></span></td><td><span style='color: green; cursor: pointer;' onclick='edititem(" + i + ")'> edit</span></td><td><span style='color: red; cursor: pointer;' onclick='hapusitem(" + i + ")'>hapus</span></td></tr>";
+										datalisttulisan += "<tr><td>" + nomorurut + "</td><td>" + datasitus.tulisan[i].judul + "</td><td><span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].perma + "' target='_blank'><i class='fa fa-eye'></i></a></span></td><td><span style='cursor: pointer;' onclick='edititem(" + i + ")'><i class='fa fa-pencil'></i></span></td><td><span style='cursor: pointer;' onclick='hapusitem(" + i + ")'><i class='fa fa-trash'></i></span></td></tr>";
 										
 										nomorurut++;
 									}
@@ -494,7 +494,7 @@ if($data != ""){
 						}
 						
 						function tampilkangalerimedia(){
-							$("body").append("<div id='popupgalerimedia'>" + $("#daftargambar").html() + "<button class='submitbutton' onclick='tutuppopupgm()'>Tutup</button></div>");
+							$("body").append("<div id='popupgalerimedia' style='padding: 20px;'><div>" + $("#daftargambar").html() + "</div><button class='submitbutton' onclick='tutuppopupgm()'>Tutup</button></div>");
 						}
 						
 						function tutuppopupgm(){
@@ -552,6 +552,9 @@ if($data != ""){
 							return string == undefined ? '' : string.replace(/[^a-z0-9_]+/gi, '-').replace(/^-|-$/g, '').toLowerCase();
 						}
 						
+						function gotoadmin(){
+							location.href = location.href.replace(location.search, "");
+						}
 						
 					</script>
 					
