@@ -461,6 +461,12 @@ if($data != ""){
 							var urlsitus = $("#urlsitus").val();
 							var teksfooter = $("#teksfooter").val();
 							
+							//removing last slash
+							if(urlsitus[urlsitus.length-1] == "/"){
+								urlsitus = urlsitus.slice(0, -1);
+								console.log("It has slash");
+							}
+							
 							datasitus.pengaturan.judul = judulwebsite;
 							datasitus.pengaturan.urlsitus = urlsitus;
 							datasitus.pengaturan.teksfooter = teksfooter;
@@ -491,7 +497,7 @@ if($data != ""){
 								datasitus.pengaturan.themeClient = theme;
 								kirimdata();
 								setTimeout(function(){
-									location.href = datasitus.pengaturan.urlsitus + "admin.php?page=theme";;
+									location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=theme";;
 								}, 1000);
 							});
 						}
@@ -501,7 +507,7 @@ if($data != ""){
 								datasitus.pengaturan.themeAdmin = theme;
 								kirimdata();
 								setTimeout(function(){
-									location.href = datasitus.pengaturan.urlsitus + "admin.php?page=theme";;
+									location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=theme";;
 								}, 1000);
 							});
 						}
