@@ -2,26 +2,158 @@
 <html>
 	<head>
 		<title>Bloggee - Super Simple No SQL Blog CMS</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+		<style>
+			
+			body{
+				background-color: #f4f4f4;
+				margin: 0px;
+				padding: 0px;
+				font-family: 'Quicksand', sans-serif;
+			}
+			
+			h1, h2, h3, h4, h5, p{
+				margin: 0px;
+				margin-bottom: 10px;
+			}
+		
+			#header{
+				background-color: #464a54;
+				color: white;
+				margin: 0px;
+				padding: 20px;
+			}
+			
+			#intro{
+				background-color: #353740;
+				color: #ff5a2a;
+				margin: 0px;
+				padding: 75px;
+				padding-bottom: 150px;
+				text-align: center;
+			}
+			
+			#mockup{
+				text-align: center;
+				margin-top: -125px;
+			}
+			
+			.headermenuitem{
+				display: inline-block;
+				padding: 10px;
+				margin-left: 10px;
+			}
+			
+			.textblock{
+				text-align: center;
+				padding: 30px;
+			}
+			
+			.maxwidth{
+				width: 100%; 
+				max-width: 720px;
+				margin: 0 auto;
+			}
+			
+			#footer1{
+				text-align: center;
+				padding: 30px;
+				background-color: #ff5a2a;
+				color: white;
+			}
+			
+			#footer2{
+				text-align: center;
+				padding: 10px;
+				background-color: #353740;
+				color: gray;
+				font-size: 12px;
+				
+			}
+			
+			a{
+				color: inherit;
+				text-decoration: underline;
+			}
+			
+			a:hover{
+				text-decoration: none;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Bloggee</h1>
-		<h2>Super Simple No SQL Blog CMS</h2>
 		
-		<h3>What is this CMS for?</h3>
-		<p>This Content Management System is suitable for you if you are planning to have a small and simple personal blog with relatively small ammounts of blog post contents. If you want to make an extensively large content website, then you better to find any other CMS.</p>
+		<div id="header">
+			<div class="maxwidth">
+				<div style = "display: table; width: 100%; box-sizing: border-box;">
+					<div style="display: table-cell; vertical-align: middle;">
+						<h1 style="margin: 0px;">Bloggee</h1>
+					</div>
+					<div style="display: table-cell; vertical-align: middle; text-align: right;">
+						<div class="headermenuitem"><a href="#about">About</a></div>
+						<div class="headermenuitem"><a href="#gs">Getting Started</a></div>
+						<div class="headermenuitem"><a href="#download">Download</a></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
 		
-		<h3>Getting Started</h3>
-		<ul>
-			<li>Download bloggee</li>
-			<li>Delete data.txt file</li>
-			<li>Open config.php</li>
-			<li>Set your Admin Username and Password</li>
-			<li>Change the data.txt to something that others cannot guess like 617eff5e852b8.txt</li>
-			<li>Login to admin panel: yoursite/admin.php</li>
-			<li>Start creating!</li>
-		</ul>
+		<div id="intro">
+			<div class="maxwidth">
+				<h2>Super Simple No SQL Blog CMS</h2>
+				<p style="color: white;">Minimum Setup Steps - Maximum Functionality</p>
+			</div>
+		</div>
 		
-		<h3>Get Bloggee Now</h3>
-		<a href="https://github.com/habibieamrullah/bloggee">Get it from GitHub and start publishing!</a>
+		<div id="mockup">
+			<img src="bloggem1.png" style="width: 100%; max-width: 400px;">
+		</div>
+		
+		<div class="textblock">
+			<div class="maxwidth">
+				<a id="about"></a>
+				<h3>What is this CMS for?</h3>
+				<p>This Content Management System is suitable for you if you are planning to have a small and simple personal blog with relatively small ammounts of blog post contents. If you want to make an extensively large content website, then you better to find any other CMS.</p>
+			</div>
+		</div>
+		
+		<div class="textblock" style="text-align: left;">
+			<div class="maxwidth">
+				<a id="gs"></a>
+				<h3>Getting Started</h3>
+				<ul>
+					<li>Download bloggee</li>
+					<li>Delete data.txt file</li>
+					<li>Open config.php</li>
+					<li>Set your Admin Username and Password</li>
+					<li>Change the data.txt to something that others cannot guess like 617eff5e852b8.txt</li>
+					<li>Login to admin panel: yoursite/admin.php</li>
+					<li>Start creating!</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="textblock" style="text-align: left;">
+			<div class="maxwidth">
+				<a id="download"></a>
+				<h3>Get Bloggee Now</h3>
+				<a href="https://github.com/habibieamrullah/bloggee">Get it from GitHub and start publishing!</a>
+			</div>
+		</div>
+		
+		
+		<div id="footer1">
+			<p>For more information, contact me: <a href="mailto:habibieamrullah@gmail.com">habibieamrullah@gmail.com</a></p>
+		</div>
+		
+		<div id="footer2">
+			<p>Copyright Bloggee 2021 - All rights reserved.</p>
+		</div>
+		
 	</body>
 </html>
