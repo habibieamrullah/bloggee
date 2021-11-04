@@ -35,6 +35,13 @@ if(isset($_POST["adminusername"]) && isset($_POST["adminpassword"])){
 				unlink($filetulisan);
 		}
 		
+		if(isset($_POST["hapusgambar"])){
+			$gambar = $_POST["hapusgambar"];
+			
+			if(file_exists("uploads/" . $gambar))
+				unlink("uploads/" . $gambar);
+		}
+		
 	}
 }
 

@@ -18,10 +18,10 @@
 					
 					if(isset($_GET["post"])){
 						
-						$postid = $_GET["post"];
+						$postperma = $_GET["post"];
 						
 						foreach($gee_datasitus->tulisan as $x) {
-							if($x->id == $postid){
+							if($x->perma == $postperma){
 								?>
 								
 								<div class="singlepost" style="display: table; width: 100%;">
@@ -64,10 +64,10 @@
 								$x = $gee_datasitus->tulisan[--$index];
 								?>
 								<div class="postthumb">
-									<a href="?post=<?php echo $x->id ?>"><img src="<?php echo $gee_urlupload . $x->gambarandalan ?>" style="width: 100%;"></a>
+									<a href="?post=<?php echo $x->perma ?>"><img src="<?php echo $gee_urlupload . $x->gambarandalan ?>" style="width: 100%;"></a>
 									<div style="padding: 20px;">
 										<p style="color: #c17e41; font-size: 12px; font-weight: bold;"><?php echo $x->tanggal ?></p>
-										<h2><a href="?post=<?php echo $x->id ?>"><?php echo  $x->judul ?></a></h2>
+										<h2><a href="?post=<?php echo $x->perma ?>"><?php echo  $x->judul ?></a></h2>
 										<div>
 											<?php 
 												//echo substr($x->sekilas, 0, 40);

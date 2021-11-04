@@ -3,7 +3,11 @@
 function gee_getbaseurl(){
 	//Base URL
 	$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-	return str_replace("admin.php", "", $baseurl);
+	return str_replace("/admin.php", "", $baseurl);
+}
+
+function gee_getextension($string){
+	return substr(strrchr($string,'.'),1);
 }
 
 function gee_uploadAndResize($newimagename, $imageinputname, $uploaddirectory, $widthsize){
@@ -150,5 +154,11 @@ function gee_resizeAndSave($src, $dest, $targetWidth, $targetHeight = null) {
         $dest,
         IMAGE_HANDLERS[$type]['quality']
     );
+}
+
+function gee_urlfriendly($string){
+	$s = ' Zhongxiao Dunhua Sun ';
+	$r = preg_replace('/\W+/', '-', strtolower(trim($s)));
+	return $r;
 }
 ?>

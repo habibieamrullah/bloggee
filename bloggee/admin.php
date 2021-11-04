@@ -218,6 +218,7 @@ if($data != ""){
 									echo "<div>";
 									foreach(scandir($folder) as $theme){
 										if($theme != "." && $theme != ".."){
+											
 											if($datasitus->pengaturan->themeAdmin == $theme)
 												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
@@ -225,6 +226,7 @@ if($data != ""){
 											?>
 											<div style="display: inline-block; width: 214px; height: 128px; background-image: url(<?php echo $folder . $theme . "/screenshot.jpg" ?>); background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px; <?php echo $border ?>" onclick="setadmintheme('<?php echo $theme ?>')"></div>
 											<?php
+										
 										}	
 										
 									}
@@ -278,12 +280,14 @@ if($data != ""){
 									echo "<div id='daftargambar'>";
 									foreach(scandir($folder) as $gambar){
 										if($gambar != "." && $gambar != ".."){
-											?>
-											<div style="display: inline-block; text-align: center; margin: 10px;">
-												<div style="display: inline-block; width: 128px; height: 128px; background-image: url(uploads/<?php echo $gambar ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="pilihgambarini('<?php echo $gambar ?>')"></div>
-												<div><i class="fa fa-trash"></i> Hapus</div>
-											</div>
-											<?php
+											if(gee_getextension($gambar) == "jpg" || gee_getextension($gambar) == "png"){
+												?>
+												<div style="display: inline-block; text-align: center; margin: 10px;">
+													<div style="display: inline-block; width: 128px; height: 128px; background-image: url(uploads/<?php echo $gambar ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="pilihgambarini('<?php echo $gambar ?>')"></div>
+													<div onclick="hapusgambar('<?php echo $gambar ?>')" style="cursor: pointer;"><i class="fa fa-trash"></i> Hapus</div>
+												</div>
+												<?php
+											}
 										}	
 										
 									}
@@ -360,6 +364,7 @@ if($data != ""){
 							}
 							
 							var judul = $("#judul").val();
+							var perma = urlfriendly(judul);
 							var tanggal = $("#tanggal").val();
 							var gambarandalan = $("#gambarandalan").val();
 							var sekilas = $("#sekilas").val();
@@ -369,6 +374,7 @@ if($data != ""){
 							datasitus.tulisan.push({
 								"id" : idartikel,
 								"judul" : judul,
+								"perma" : perma,
 								"tanggal" : tanggal,
 								"gambarandalan" : gambarandalan,
 								"sekilas" : sekilas,
@@ -417,6 +423,16 @@ if($data != ""){
 							});
 						}
 						
+						function hapusgambar(gambar){
+							$.post("async.php", {
+								"hapusgambar" : gambar,
+								"adminusername" : adminusername,
+								"adminpassword" : adminpassword,
+							}, function(data){
+								location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=galerigambar";;
+							});
+						}
+						
 						function tampilkanhalaman(hal){
 							$(".halaman").hide();
 							$("#" + hal).show();
@@ -448,7 +464,9 @@ if($data != ""){
 							var sekilasbaru = $("#editsekilas").val();
 							var kontenbaru = tinymce.activeEditor.getContent();
 							var gambarandalanbaru = $("#editgambarandalan").val();
+							
 							datasitus.tulisan[idx].judul = judulbaru;
+							datasitus.tulisan[idx].perma = urlfriendly(judulbaru);
 							datasitus.tulisan[idx].tanggal = tanggalbaru;
 							datasitus.tulisan[idx].sekilas = sekilasbaru;
 							datasitus.tulisan[idx].gambarandalan = gambarandalanbaru;
@@ -520,6 +538,20 @@ if($data != ""){
 							}
 						});
 						
+						tinymce.init({ 
+							selector : '.texteditor' , 
+							plugins : 'directionality, code, link', 
+							toolbar: "ltr rtl | alignleft aligncenter alignright alignjustify | outdent indent | sizeselect | bold italic | fontselect | fontsizeselect", 
+							relative_urls: false, 
+							remove_script_host : true, 
+							statusbar: false,
+							convert_newlines_to_brs : true
+						});
+						
+						function urlfriendly(string) {
+							return string == undefined ? '' : string.replace(/[^a-z0-9_]+/gi, '-').replace(/^-|-$/g, '').toLowerCase();
+						}
+						
 						
 					</script>
 					
@@ -565,15 +597,7 @@ if($data != ""){
 		?>
 		
 		<script>
-		tinymce.init({ 
-			selector : '.texteditor' , 
-			plugins : 'directionality, code, link', 
-			toolbar: "ltr rtl | alignleft aligncenter alignright alignjustify | outdent indent | sizeselect | bold italic | fontselect | fontsizeselect", 
-			relative_urls: false, 
-			remove_script_host : true, 
-			statusbar: false,
-			convert_newlines_to_brs : true
-		});
+		
 
 		</script>
 	</body>
