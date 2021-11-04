@@ -25,8 +25,8 @@ if($data != ""){
 		
 		<?php 
 		$currenttheme = "earlyadmin";
-		if(isset($datasitus->pengaturan->themeAdmin))
-			$currenttheme = $datasitus->pengaturan->themeAdmin;
+		if(isset($datasitus->pengaturan->themeadmin))
+			$currenttheme = $datasitus->pengaturan->themeadmin;
 		?>
 		<link rel="stylesheet" href="themes/admin/<?php echo $currenttheme ?>/style.css">
 		
@@ -205,7 +205,7 @@ if($data != ""){
 											$themeinfo = "<h4 style='margin: 0px;'>" . explode(":", $themeinfoarr[0])[1] . " by " . explode(":", $themeinfoarr[1])[1] . "</h4><p style='margin: 0px;'>" . explode(":", $themeinfoarr[2])[1] . "</p>";
 											
 											
-											if($datasitus->pengaturan->themeClient == $theme)
+											if($datasitus->pengaturan->themeclient == $theme)
 												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
@@ -233,7 +233,7 @@ if($data != ""){
 											$themeinfo = "<h4 style='margin: 0px;'>" . explode(":", $themeinfoarr[0])[1] . " by " . explode(":", $themeinfoarr[1])[1] . "</h4><p style='margin: 0px;'>" . explode(":", $themeinfoarr[2])[1] . "</p>";
 											
 											
-											if($datasitus->pengaturan->themeAdmin == $theme)
+											if($datasitus->pengaturan->themeadmin == $theme)
 												$border = " border: 2px solid green; transform: scale(1.1,1.1);";
 											else
 												$border = "";
@@ -261,6 +261,12 @@ if($data != ""){
 									
 									<label>Teks Footer</label>
 									<input id="teksfooter">
+									
+									<label>Link Dinamis (link post berubah saat judul berubah)</label>
+									<select id="linkdinamis">
+										<option value=0>Tidak</option>
+										<option value=1>Ya</option>
+									</select>
 									
 									<button class='submitbutton' onclick="simpanpengaturan()">Simpan</button>
 								</div>
@@ -335,8 +341,9 @@ if($data != ""){
 								pengaturan : {
 									judul : "Another Bloggee Blog",
 									urlsitus : defaultbaseurl,
-									themeAdmin : "earlyadmin",
-									themeClient : "earlyclient",
+									themeadmin : "earlyadmin",
+									themeclient : "earlyclient",
+									linkdinamis : "0",
 									teksfooter : "Powered by <a href='https://habibieamrullah.github.io/bloggee/'>Bloggee</a>",
 								},
 							}
@@ -345,6 +352,7 @@ if($data != ""){
 						$("#judulwebsite").val(datasitus.pengaturan.judul);
 						$("#urlsitus").val(datasitus.pengaturan.urlsitus);
 						$("#teksfooter").val(datasitus.pengaturan.teksfooter);
+						$('#linkdinamis option[value="' + datasitus.pengaturan.linkdinamis + '"]').attr("selected",true);
 						
 						
 						
@@ -482,7 +490,8 @@ if($data != ""){
 							var gambarandalanbaru = $("#editgambarandalan").val();
 							
 							datasitus.tulisan[idx].judul = judulbaru;
-							datasitus.tulisan[idx].perma = urlfriendly(judulbaru);
+							if(datasitus.pengaturan.linkdinamis == "1")
+								datasitus.tulisan[idx].perma = urlfriendly(judulbaru);
 							datasitus.tulisan[idx].tanggal = tanggalbaru;
 							datasitus.tulisan[idx].sekilas = sekilasbaru;
 							datasitus.tulisan[idx].gambarandalan = gambarandalanbaru;
@@ -494,6 +503,7 @@ if($data != ""){
 							var judulwebsite = $("#judulwebsite").val();
 							var urlsitus = $("#urlsitus").val();
 							var teksfooter = $("#teksfooter").val();
+							var linkdinamis = $("#linkdinamis").val();
 							
 							//removing last slash
 							if(urlsitus[urlsitus.length-1] == "/"){
@@ -504,6 +514,7 @@ if($data != ""){
 							datasitus.pengaturan.judul = judulwebsite;
 							datasitus.pengaturan.urlsitus = urlsitus;
 							datasitus.pengaturan.teksfooter = teksfooter;
+							datasitus.pengaturan.linkdinamis = linkdinamis;
 							
 							kirimdata();
 
@@ -528,7 +539,7 @@ if($data != ""){
 						
 						function settheme(theme){
 							$("body").fadeOut(500, function(){
-								datasitus.pengaturan.themeClient = theme;
+								datasitus.pengaturan.themeclient = theme;
 								kirimdata();
 								setTimeout(function(){
 									location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=theme";;
@@ -538,7 +549,7 @@ if($data != ""){
 						
 						function setadmintheme(theme){
 							$("body").fadeOut(500, function(){
-								datasitus.pengaturan.themeAdmin = theme;
+								datasitus.pengaturan.themeadmin = theme;
 								kirimdata();
 								setTimeout(function(){
 									location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=theme";;

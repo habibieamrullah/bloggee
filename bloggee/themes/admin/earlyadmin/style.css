@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, p{
 	background-color: #2280f6;
 }
 
-input, textarea{
+input, textarea, select{
 	display: block;
 	padding: 10px;
 	margin-bottom: 10px;

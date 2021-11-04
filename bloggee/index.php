@@ -8,8 +8,8 @@
 	if($gee_jsonsitus != ""){
 		$gee_datasitus = json_decode($gee_jsonsitus);
 		$gee_theme = "earlyclient";
-		if(isset($gee_datasitus->pengaturan->themeClient))
-			$gee_theme = $gee_datasitus->pengaturan->themeClient;
+		if(isset($gee_datasitus->pengaturan->themeclient))
+			$gee_theme = $gee_datasitus->pengaturan->themeclient;
 		$gee_urlsitus = $gee_datasitus->pengaturan->urlsitus;
 		$gee_urltheme = $gee_urlsitus . "/themes/client/" . $gee_theme;
 		$gee_urlupload = $gee_urlsitus . "/uploads/";
