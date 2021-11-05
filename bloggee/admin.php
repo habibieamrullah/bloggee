@@ -58,8 +58,8 @@ include("functions.php");
 						<div style="text-align: left">
 						
 							<!-- admin logout -->
-							<h2>Anda berhasil keluar</h2>
-							<p>Tunggu sejenak, Anda akan diarahkan ke halaman Login.</p>
+							<h2><?php echo gee_say("Kamu berhasil keluar") ?></h2>
+							<p><?php echo gee_say("Tunggu sejenak, kamu akan diarahkan ke halaman Login.") ?></p>
 							<script>
 								setTimeout(function(){
 									
@@ -93,8 +93,8 @@ include("functions.php");
 									?>
 									
 									<!-- login success -->
-									<h2>Login sukses!</h2>
-									<p>Tunggu sejenak, Anda akan diarahkan ke halaman Admin Panel.</p>
+									<h2><?php echo gee_say("Login sukses!") ?></h2>
+									<p><?php echo  gee_say("Tunggu sejenak, Anda akan diarahkan ke halaman Admin Panel.") ?></p>
 									<script>
 										setTimeout(function(){
 											
@@ -108,7 +108,10 @@ include("functions.php");
 									
 								}else{
 									//login gagal
-									echo "<h2>Login gagal!</h2><p>Silahkan coba lagi.</p>";
+									?>
+									<h2><?php echo gee_say("Login gagal!") ?></h2>
+									<p><?php echo gee_say("Silahkan coba lagi.") ?></p>
+									<?php
 								}
 								
 								?>
@@ -162,10 +165,10 @@ include("functions.php");
 									<label><?php echo gee_say("Gambar Andalan") ?></label>
 									<input id="gambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
 									
-									<label>Sekilas</label>
+									<label><?php echo gee_say("Sekilas") ?></label>
 									<textarea id="sekilas"></textarea>
 									
-									<label>Konten</label>
+									<label><?php echo gee_say("Konten") ?></label>
 									<textarea id="editkonten" class="texteditor"></textarea>
 									<br>
 									
@@ -277,6 +280,7 @@ include("functions.php");
 									<select id="bahasasitus">
 										<option value=0>Bahasa Indonesia</option>
 										<option value=1>English</option>
+										<option value=2>French</option>
 									</select>
 									
 									<button class='submitbutton' onclick="simpanpengaturan()"><?php echo gee_say("Simpan") ?></button>
