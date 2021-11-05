@@ -1,4 +1,4 @@
-# bloggee
+# Bloggee - a no SQL blog CMS
  Super Simple No SQL Blog CMS. Check out the main page of bloggee here: https://habibieamrullah.github.io/bloggee/
 
 ## Getting Started
