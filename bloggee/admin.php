@@ -1,7 +1,7 @@
 <?php 
 
 include("config.php"); 
-include("functions.php"); 
+
 
 $datasitus = array();
 			
@@ -11,7 +11,12 @@ if(file_exists($filedb)){
 }
 if($data != ""){
 	$datasitus = json_decode($data);
+	$bahasasitus = $datasitus->pengaturan->bahasasitus;
 }
+
+
+
+include("functions.php"); 
 
 ?>
 
@@ -131,22 +136,22 @@ if($data != ""){
 								
 								
 								
-								<div class="leftmenuitem" onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'><i class="fa fa-list" aria-hidden="true"></i>Daftar Tulisan</div>
-								<div class="leftmenuitem" onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'><i class="fa fa-plus" aria-hidden="true"></i>Tambah Tulisan</div>
-								<div class="leftmenuitem" onclick="tampilkanhalaman('galerigambar')" style='cursor: pointer;'><i class="fa fa-image" aria-hidden="true"></i>Galeri Gambar</div>
-								<div class="leftmenuitem" onclick="tampilkanhalaman('theme')" style='cursor: pointer;'><i class="fa fa-paint-brush" aria-hidden="true"></i>Tampilan</div>
-								<div class="leftmenuitem" onclick="tampilkanhalaman('pengaturan')" style='cursor: pointer;'><i class="fa fa-cogs" aria-hidden="true"></i>Pengaturan</div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('daftartulisan')" style='cursor: pointer;'><i class="fa fa-list" aria-hidden="true"></i><?php echo gee_say("Daftar Tulisan") ?></div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('tambahdata')" style='cursor: pointer;'><i class="fa fa-plus" aria-hidden="true"></i><?php echo gee_say("Tambah Tulisan") ?></div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('galerigambar')" style='cursor: pointer;'><i class="fa fa-image" aria-hidden="true"></i><?php echo gee_say("Galeri Gambar") ?></div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('theme')" style='cursor: pointer;'><i class="fa fa-paint-brush" aria-hidden="true"></i><?php echo gee_say("Tampilan") ?></div>
+								<div class="leftmenuitem" onclick="tampilkanhalaman('pengaturan')" style='cursor: pointer;'><i class="fa fa-cogs" aria-hidden="true"></i><?php echo gee_say("Pengaturan") ?></div>
 								
-								<div class="leftmenuitem"><a href="?logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></div>
+								<div class="leftmenuitem"><a href="?logout"><i class="fa fa-sign-out" aria-hidden="true"></i><?php echo gee_say("Keluar") ?></a></div>
 							</div>
 							<div id="admincontent">
 								<div id="daftartulisan" class="halaman">
-									<h2>Daftar Tulisan</h2>
+									<h2><?php echo gee_say("Daftar Tulisan") ?></h2>
 									<div id="listtulisan"></div>
 								</div>
 								
 								<div id="tambahdata" class="halaman">
-									<h2>Tambah Tulisan</h2>
+									<h2><?php echo gee_say("Tambah Tulisan") ?></h2>
 									
 									<label>Judul Tulisan</label>
 									<input id="judul">
@@ -191,7 +196,7 @@ if($data != ""){
 								</div>
 								
 								<div id="theme" class="halaman">
-									<h2>Tampilan dan Tema</h2>
+									<h2><?php echo gee_say("Tampilan") ?></h2>
 									<h3>Tema Situs</h3>
 									<?php
 									$folder = "themes/client/";
@@ -251,21 +256,27 @@ if($data != ""){
 								</div>
 								
 								<div id="pengaturan" class="halaman">
-									<h2>Pengaturan Website</h2>
+									<h2><?php echo gee_say("Pengaturan") ?></h2>
 									
-									<label>Judul Website</label>
+									<label><?php echo gee_say("Judul Website") ?></label>
 									<input id="judulwebsite">
 									
-									<label>URL Situs</label>
+									<label><?php echo gee_say("URL Situs") ?></label>
 									<input id="urlsitus">
 									
-									<label>Teks Footer</label>
+									<label><?php echo gee_say("Teks Footer") ?></label>
 									<input id="teksfooter">
 									
-									<label>Link Dinamis (link tulisan berubah saat judul berubah)</label>
+									<label><?php echo gee_say("Link Dinamis (link tulisan berubah saat judul berubah)") ?></label>
 									<select id="linkdinamis">
-										<option value=0>Tidak</option>
-										<option value=1>Ya</option>
+										<option value=0><?php echo gee_say("Tidak") ?></option>
+										<option value=1><?php echo gee_say("Ya") ?></option>
+									</select>
+									
+									<label><?php echo gee_say("Bahasa") ?></label>
+									<select id="bahasasitus">
+										<option value=0>Bahasa Indonesia</option>
+										<option value=1>English</option>
 									</select>
 									
 									<button class='submitbutton' onclick="simpanpengaturan()">Simpan</button>
@@ -273,7 +284,7 @@ if($data != ""){
 								
 								
 								<div id="galerigambar" class="halaman">
-									<h2>Galeri Gambar</h2>
+									<h2><?php echo gee_say("Galeri Gambar") ?></h2>
 									
 									<?php
 									
@@ -344,6 +355,7 @@ if($data != ""){
 									themeadmin : "earlyadmin",
 									themeclient : "earlyclient",
 									linkdinamis : "0",
+									bahasasitus : "0",
 									teksfooter : "Powered by <a href='https://habibieamrullah.github.io/bloggee/'>Bloggee</a>",
 								},
 							}
@@ -353,6 +365,7 @@ if($data != ""){
 						$("#urlsitus").val(datasitus.pengaturan.urlsitus);
 						$("#teksfooter").val(datasitus.pengaturan.teksfooter);
 						$('#linkdinamis option[value="' + datasitus.pengaturan.linkdinamis + '"]').attr("selected",true);
+						$('#bahasasitus option[value="' + datasitus.pengaturan.bahasasitus + '"]').attr("selected",true);
 						
 						
 						
@@ -453,7 +466,7 @@ if($data != ""){
 								"adminusername" : adminusername,
 								"adminpassword" : adminpassword,
 							}, function(data){
-								location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=galerigambar";;
+								location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=galerigambar";
 							});
 						}
 						
@@ -504,6 +517,7 @@ if($data != ""){
 							var urlsitus = $("#urlsitus").val();
 							var teksfooter = $("#teksfooter").val();
 							var linkdinamis = $("#linkdinamis").val();
+							var bahasasitus = $("#bahasasitus").val();
 							
 							//removing last slash
 							if(urlsitus[urlsitus.length-1] == "/"){
@@ -515,8 +529,13 @@ if($data != ""){
 							datasitus.pengaturan.urlsitus = urlsitus;
 							datasitus.pengaturan.teksfooter = teksfooter;
 							datasitus.pengaturan.linkdinamis = linkdinamis;
+							datasitus.pengaturan.bahasasitus = bahasasitus;
 							
 							kirimdata();
+							
+							setTimeout(function(){
+								location.href = datasitus.pengaturan.urlsitus + "/admin.php?page=pengaturan";;
+							}, 500);
 
 						}
 						

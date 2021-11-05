@@ -161,4 +161,33 @@ function gee_urlfriendly($string){
 	$r = preg_replace('/\W+/', '-', strtolower(trim($s)));
 	return $r;
 }
+
+function gee_say($text){
+	
+	global $bahasasitus;
+	
+	if($bahasasitus == "1"){
+		switch($text){
+			case "Daftar Tulisan" :	return "All Posts";
+			case "Galeri Gambar" :	return "Image Gallery";
+			case "Judul Website" :	return "Site Title";
+			case "Keluar" :	return "Logout";
+			case "Pengaturan" :	return "Settings";
+			case "Tambah Tulisan" :	return "New Post";
+			case "Tampilan" :	return "Themes";
+			case "Bahasa" :	return "Language";
+			case "Ya" :	return "Yes";
+			case "Tidak" :	return "No";
+			case "Link Dinamis (link tulisan berubah saat judul berubah)" :	return "Dynamic Links (change post link whenever post title is updated)";
+			case "Teks Footer" :	return "Footer Text";
+			case "URL Situs" :	return "Site URL";
+			default : return "UNTRANSLATED (" . $text . ")";
+		}
+	}else{
+		return $text;
+	}
+}
+	
+	
+	
 ?>
