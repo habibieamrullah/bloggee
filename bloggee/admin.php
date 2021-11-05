@@ -153,13 +153,13 @@ include("functions.php");
 								<div id="tambahdata" class="halaman">
 									<h2><?php echo gee_say("Tambah Tulisan") ?></h2>
 									
-									<label>Judul Tulisan</label>
+									<label><?php echo gee_say("Judul") ?></label>
 									<input id="judul">
 									
-									<label>Tanggal</label>
+									<label><?php echo gee_say("Tanggal") ?></label>
 									<input id="tanggal" class="datepicker">
 									
-									<label>Gambar Andalan</label>
+									<label><?php echo gee_say("Gambar Andalan") ?></label>
 									<input id="gambarandalan" class="inputgambarandalan" onclick="tampilkangalerimedia()" readonly>
 									
 									<label>Sekilas</label>
@@ -192,12 +192,12 @@ include("functions.php");
 									
 									<br>
 									
-									<button class='submitbutton' id="tombolsimpan">Simpan</button>
+									<button class='submitbutton' id="tombolsimpan"><?php echo gee_say("Simpan") ?></button>
 								</div>
 								
 								<div id="theme" class="halaman">
 									<h2><?php echo gee_say("Tampilan") ?></h2>
-									<h3>Tema Situs</h3>
+									<h3><?php echo gee_say("Tema Situs") ?></h3>
 									<?php
 									$folder = "themes/client/";
 									echo "<div style='margin-bottom: 20px;'>";
@@ -226,7 +226,7 @@ include("functions.php");
 									echo "</div>";
 									?>
 									
-									<h3>Tema Admin</h3>
+									<h3><?php echo gee_say("Tema Admin") ?></h3>
 									<?php
 									$folder = "themes/admin/";
 									echo "<div>";
@@ -279,7 +279,7 @@ include("functions.php");
 										<option value=1>English</option>
 									</select>
 									
-									<button class='submitbutton' onclick="simpanpengaturan()">Simpan</button>
+									<button class='submitbutton' onclick="simpanpengaturan()"><?php echo gee_say("Simpan") ?></button>
 								</div>
 								
 								
@@ -317,7 +317,7 @@ include("functions.php");
 												?>
 												<div style="display: inline-block; text-align: center; margin: 10px;">
 													<div style="display: inline-block; width: 128px; height: 128px; background-image: url(uploads/<?php echo $gambar ?>); background-size: cover; background-repeat: no-repeat; background-position: center center;" onclick="pilihgambarini('<?php echo $gambar ?>')"></div>
-													<div onclick="hapusgambar('<?php echo $gambar ?>')" style="cursor: pointer;"><i class="fa fa-trash"></i> Hapus</div>
+													<div onclick="hapusgambar('<?php echo $gambar ?>')" style="cursor: pointer;"><i class="fa fa-trash"></i> <?php echo gee_say("Hapus") ?></div>
 												</div>
 												<?php
 											}
@@ -329,7 +329,7 @@ include("functions.php");
 									
 									<form method="post" enctype="multipart/form-data">
 										<input type="file" name="filegambar" accept="image/*">
-										<input class='submitbutton' type="submit" value="Unggah">
+										<input class='submitbutton' type="submit" value="<?php echo gee_say("Unggah") ?>">
 									</form>
 								</div>
 							</div>
@@ -376,7 +376,7 @@ include("functions.php");
 							var nomorurut = 1;
 							if(datasitus.tulisan != undefined){
 								if(datasitus.tulisan.length > 0){
-									var datalisttulisan = "<table class='admintable'><tr><th>No</th><th>Judul</th><th>Lihat</th><th>Edit</th><th>Hapus</th>";
+									var datalisttulisan = "<table class='admintable'><tr><th>No</th><th><?php echo gee_say("Judul") ?></th><th><?php echo gee_say("Lihat") ?></th><th><?php echo gee_say("Ubah") ?></th><th><?php echo gee_say("Hapus") ?></th>";
 									for(var i = datasitus.tulisan.length-1; i >= 0; i--){
 										
 										datalisttulisan += "<tr><td>" + nomorurut + "</td><td>" + datasitus.tulisan[i].judul + "</td><td><span><a href='" + datasitus.pengaturan.urlsitus + "?post=" + datasitus.tulisan[i].perma + "' target='_blank'><i class='fa fa-eye'></i></a></span></td><td><span style='cursor: pointer;' onclick='edititem(" + i + ")'><i class='fa fa-pencil'></i></span></td><td><span style='cursor: pointer;' onclick='hapusitem(" + i + ")'><i class='fa fa-trash'></i></span></td></tr>";

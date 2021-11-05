@@ -172,15 +172,25 @@ function gee_say($text){
 			case "Galeri Gambar" :	return "Image Gallery";
 			case "Judul Website" :	return "Site Title";
 			case "Keluar" :	return "Logout";
+			case "Judul" :	return "Title";
+			case "Lihat" :	return "View";
+			case "Tanggal" : return "Date";
+			case "Ubah" : return "Edit";
 			case "Pengaturan" :	return "Settings";
 			case "Tambah Tulisan" :	return "New Post";
-			case "Tampilan" :	return "Themes";
+			case "Tampilan" : return "Themes";
 			case "Bahasa" :	return "Language";
 			case "Ya" :	return "Yes";
-			case "Tidak" :	return "No";
+			case "Tidak" : return "No";
+			case "Gambar Andalan" : return "Featured Image";
+			case "Simpan" :	return "Save";
+			case "Unggah" :	return "Upload";
+			case "Hapus" :	return "Delete";
+			case "Tema Situs" :	return "Site Theme";
+			case "Tema Admin" :	return "Admin Theme";
 			case "Link Dinamis (link tulisan berubah saat judul berubah)" :	return "Dynamic Links (change post link whenever post title is updated)";
-			case "Teks Footer" :	return "Footer Text";
-			case "URL Situs" :	return "Site URL";
+			case "Teks Footer" : return "Footer Text";
+			case "URL Situs" : return "Site URL";
 			default : return "UNTRANSLATED (" . $text . ")";
 		}
 	}else{
