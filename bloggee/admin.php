@@ -295,7 +295,7 @@ include("functions.php");
 									if(isset($_FILES["filegambar"])){
 										
 										$namagambarbaru = uniqid();
-										$gambarbaru = gee_uploadAndResize($namagambarbaru, "filegambar", "uploads/", 256);
+										$gambarbaru = gee_uploadAndResize($namagambarbaru, "filegambar", "uploads/", 512);
 										
 										echo "Gambar berhasil diupload: " . $gambarbaru;
 										
