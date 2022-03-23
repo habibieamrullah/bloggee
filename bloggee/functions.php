@@ -157,8 +157,7 @@ function gee_resizeAndSave($src, $dest, $targetWidth, $targetHeight = null) {
 }
 
 function gee_urlfriendly($string){
-	$s = ' Zhongxiao Dunhua Sun ';
-	$r = preg_replace('/\W+/', '-', strtolower(trim($s)));
+	$r = preg_replace('/\W+/', '-', strtolower(trim($string)));
 	return $r;
 }
 
